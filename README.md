@@ -1,0 +1,1 @@
+This is a website build for Apollo PC. Our goal is to build a simple landing page for the computer company. 
