@@ -14,6 +14,24 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Larger shadow on hover */
 }
 
+div[aria-label="Map"][aria-roledescription="map"][role="region"] {
+  display: none !important;
+  visibility: hidden;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+}
+
+/* Hide Google Map injection */
+div[aria-label="Map"][aria-roledescription="map"][role="region"] {
+  display: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  position: absolute !important;
+  overflow: hidden !important;
+}
+
 .review-author {
   font-weight: bold;
   font-size: 1.1em;

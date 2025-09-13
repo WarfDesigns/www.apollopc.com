@@ -1,224 +1,239 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Google Reviews</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Trade+Winds&display=swap" rel="stylesheet">
-    <script
-      src="https://code.jquery.com/jquery-2.2.4.min.js"
-      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-      crossorigin="anonymous"></script>
-    <script src="https://rawgit.com/peledies/google-places/master/google-places.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyB7wK_7LjM8k7mz9_nIog_letQVOMamYew&signed_in=true&libraries=places"></script>
-<style>
-  /* ===== Responsive layout: neat stacking with consistent gaps ===== */
-#google-reviews {
-  /* grid makes spacing perfect without relying on margins */
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 16px; /* space between cards */
-  max-width: 980px;
-  margin: 20px auto;
-  padding: 0 12px;
-}
+<head>
+  <title>Google Reviews</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script src="https://rawgit.com/peledies/google-places/master/google-places.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyB7wK_7LjM8k7mz9_nIog_letQVOMamYew&signed_in=true&libraries=places"></script>
+  <link rel="stylesheet" href="google-places.css">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 40px 20px;
+      color: #333;
+    }
 
-/* 2 columns on tablets */
-@media (max-width: 900px) {
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    #google-logo {
+      height: 36px;
+    }
+
+    .review-button {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .review-button:hover {
+      background-color: #1d4ed8;
+    }
+
+    #schema {
+      font-size: 1.25rem;
+      font-weight: 600;
+      text-align: center;
+      margin: 0 auto 30px;
+      color: #1e293b;
+      max-width: 900px;
+    }
+
+    .grid-container {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .review-item {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .review-author {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #111827;
+    }
+
+    .review-date {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-left: 8px;
+    }
+
+    .review-text {
+      margin-top: 14px;
+      line-height: 1.6;
+      color: #374151;
+      font-size: 0.95rem;
+    }
+
+    #google-reviews .review-stars ul {
+      list-style: none;
+      padding: 0;
+      margin: 6px 0 0 0;
+      display: inline-block;
+    }
+
+    #google-reviews .review-stars ul li {
+      float: left;
+      margin-right: 5px;
+    }
+
+    #google-reviews .review-stars::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    #google-reviews .review-stars ul li i {
+      color: #ffcc00;
+      font-size: 14px;
+    }
+
+    #google-reviews .review-stars ul li i.inactive {
+      color: #c6c6c6;
+    }
+
+    #google-reviews .star:after {
+      content: "\2605";
+      font-style: normal;
+      font-size: 25px;
+    }
+
+    .read-toggle {
+      font-weight: 600;
+      color: #2563eb;
+      cursor: pointer;
+      margin-left: 6px;
+    }
+
+    .carousel-buttons {
+      display: none;
+    }
+      #map-plug,
+  #map-plug-hidden,
+  div[aria-label="Map"][aria-roledescription="map"][role="region"] {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+  }
+  
+  /* Force 4 equal-width columns for reviews */
   #google-reviews {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    max-width: 1200px; /* optional: keeps line length nice */
+    margin: 0 auto;
   }
-}
 
-/* 1 column on phones (stack neatly) */
-@media (max-width: 600px) {
-  #google-reviews {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* If your existing .review-item has a margin-bottom, neutralize it so grid gap controls spacing */
-#google-reviews .review-item {
-  margin-bottom: 0;
-}
-
-/* ===== Card interaction: lift up ~3px with a stronger shadow ===== */
-#google-reviews .review-item {
-  position: relative;
-  cursor: pointer; /* suggests interactivity on desktop */
-  transition: transform 120ms ease, box-shadow 120ms ease;
-  will-change: transform;
-}
-
-/* Hover/focus (keyboard users) — lift and deepen shadow */
-#google-reviews .review-item:hover,
-#google-reviews .review-item:focus-within {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.16);
-}
-
-/* Tap/click active state — a touch more depth */
-#google-reviews .review-item:active {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.20);
-}
-
-/* Optional: reduce motion for users who prefer it */
-@media (prefers-reduced-motion: reduce) {
+  /* Make each card fill its grid cell neatly */
   #google-reviews .review-item {
-    transition: box-shadow 120ms ease;
-  }
-}
-
-  /* Scope to the container to increase specificity */
-  #google-reviews .review-item {
-    background: #fff;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,.1);
-    transition: box-shadow .3s ease;
-  }
-  #google-reviews .review-item:hover {
-    box-shadow: 0 8px 16px rgba(0,0,0,.15);
+    height: auto;
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
   }
 
-  #google-reviews .review-author {
-    font-weight: 600;
-    font-size: 1.05rem;
-    color: #000;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  /* (Optional) Responsive fallbacks */
+  @media (max-width: 1100px) {
+    #google-reviews { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width: 800px) {
+    #google-reviews { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 520px) {
+    #google-reviews { grid-template-columns: 1fr; }
+  }
+  </style>
+</head>
+<body>
 
-  }
-  #google-reviews .review-date {
-    font-size: .85rem;
-    color: #777;
-    margin-left: 6px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-  #google-reviews .review-text {
-    margin-top: 10px;
-    line-height: 1.5;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
+  <header>
+    <img id="google-logo" src="/img/icons/google/icon.svg" alt="Google Logo">
+    <div id="schema"></div>
+    <button class="review-button">Write a Review</button>
+  </header>
 
-  /* Stars — keep your colors but clear floats so cards don’t collapse */
-  #google-reviews .review-stars ul {
-    list-style: none;
-    padding: 0;
-    margin: 6px 0 0 0;
-    display: inline-block;
-  }
-  #google-reviews .review-stars ul li {
-    float: left;
-    margin-right: 5px;
-  }
-  #google-reviews .review-stars::after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  #google-reviews .review-stars ul li i {
-    color: #ffcc00;
-    font-size: 14px;
-    
-  }
-  #google-reviews .review-stars ul li i.inactive {
-    color: #c6c6c6;
-  }
-  #google-reviews .star:after {
-    content: "\2605";
-    font-style: normal;
-    font-size: 25px;
-  }
-
-  /* Optional: give the whole reviews section a nice max width */
-
-#google-reviews .read-toggle {
-  font-weight: 600;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-#google-logo {
-  max-height: 30px;
-}
-.one-two-one-column {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-}
-.review-button {
-  display: block;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 20px;
-}
-</style>
-  </head>
-  <body>
-    <section class="one-two-one-column">
-      <img id="google-logo" src="/img/logo/google/logo.svg">
-      <div id="schema"><b></b></div>
-      <button class="review-button">Write a Review</button>
-    </section>
-    <div id="custom-address-id"><b>Address - </b></div>
-    <div id="google-phone"><b>Phone - </b></div></br>
-    <div id="google-reviews"></div>
-  </body>
+  <div class="grid-container" id="google-reviews"></div>
 
   <script>
-    $(document).ready(function() {
-
+    $(document).ready(function () {
       $("#google-reviews").googlePlaces({
-          placeId: 'ChIJf1ntuIc9ZogRxETcpBLWsFM'
-        , render: ['reviews','address','phone']
-        , min_rating: 4
-        , max_rows:5
-        , shorten_names: false
-        , schema:{
-              displayElement: "#schema"
-            , type: 'Hostel'
-            , beforeText: 'Google Users Have Rated'
-            , middleText: 'based on'
-            , afterText: 'ratings and reviews'
-          }
-        , address:{
-            displayElement: "#custom-address-id"
-          }
-      });
-
-    });
-  </script>
-  <script>
-  $(function () {
-    // Run after the googlePlaces widget finishes rendering
-    $('#google-reviews').on('afterRender.googlePlaces', function () {
-      $('#google-reviews .review-text').each(function () {
-        const $el = $(this);
-        const full = $el.text().trim();
-        const limit = 100;
-
-        if (full.length <= limit) return;
-
-        const short = full.slice(0, limit) + '… ';
-        $el.data('full', full)
-          .data('short', short)
-          .text(short)
-          .append('<a href="#" class="read-toggle">Read More</a>');
+        placeId: 'ChIJf1ntuIc9ZogRxETcpBLWsFM',
+        render: ['reviews'],
+        min_rating: 4,
+        max_rows: 0,
+        shorten_names: false,
+        schema: {
+          displayElement: "#schema",
+          type: 'LocalBusiness',
+          beforeText: 'Google Users Have Rated',
+          middleText: 'based on',
+          afterText: 'ratings and reviews'
+        }
       });
     });
 
-    // Toggle handler
-    $(document).on('click', '#google-reviews .read-toggle', function (e) {
+    $(document).on('click', '.read-toggle', function (e) {
       e.preventDefault();
       const $link = $(this);
       const $text = $link.parent();
       const isShort = $link.text() === 'Read More';
-
-      $text.contents().filter(function(){ return this.nodeType === 3; }).remove(); // remove text node
+      $text.contents().filter(function () {
+        return this.nodeType === 3;
+      }).remove();
       $text.prepend(isShort ? $text.data('full') + ' ' : $text.data('short'));
       $link.text(isShort ? 'Close' : 'Read More');
     });
+  </script>
+  <script>
+  $(document).ready(function () {
+    // Check every 300ms for any injected map element and hide it
+    const interval = setInterval(function () {
+      const mapDiv = $('div[aria-label="Map"][aria-roledescription="map"][role="region"]');
+      if (mapDiv.length > 0) {
+        mapDiv.css({
+          display: 'none',
+          height: '0',
+          width: '0',
+          overflow: 'hidden',
+          position: 'absolute'
+        });
+        clearInterval(interval); // stop checking after it's hidden
+      }
+    }, 300);
   });
 </script>
-
+</body>
 </html>
