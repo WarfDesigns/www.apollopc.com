@@ -741,3 +741,57 @@ nav a:focus-visible {
   opacity: .85;           /* tweak/remove if you prefer no change */
   outline: none;          /* remove default blue outline; add your own if needed */
 }
+
+/* === Global sticky nav (all breakpoints) === */
+nav {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  z-index: 10001;           /* above stars & content */
+  background: #fff;         /* readable over starry bg */
+  width: 100%;
+}
+/* === Sticky <nav> that actually sticks across the page === */
+
+/* 1) Remove the header's layout box so <nav>'s sticky isn't limited by it */
+header {
+  display: contents;
+}
+
+/* 2) Make the nav sticky relative to the viewport */
+nav {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  z-index: 10001;         /* above stars & content */
+  background: #fff;       /* readable over starry bg */
+  width: 100%;
+}
+
+/* 3) Guardrails: ensure the page scrolls and stars stay behind */
+html, body { height: auto; }
+body {
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  display: block !important; /* undo earlier grid centering that breaks sticky */
+}
+.stars, .stars-mid, .stars-big {
+  position: fixed !important;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+header, main, footer { position: relative; z-index: 1; }
+
+/* 4) (Optional) Fallback for rare browsers that don't support display: contents
+      In that case, stick the whole header so the nav appears sticky. */
+@supports not (display: contents) {
+  header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 10001;
+    background: #fff;
+  }
+  nav { position: static; }
+}
