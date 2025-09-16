@@ -117,6 +117,7 @@ footer a {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: white;
 }
 
 .two-column {
@@ -247,6 +248,7 @@ footer a {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: white;
 }
 
 .two-column {
@@ -354,10 +356,15 @@ body {
 
 nav {
     display: flex;
-    background: linear-gradient(to right, #4b0082, #2c0074);
+    background-color: white;
+    justify-content: center;
     text-decoration: none !important;
     padding-top: 5px;
     padding-bottom: 5px;
+    color: black !important;
+    text-decoration: none !important;
+    position: sticky;
+    top: 0;
 }
 .top-menu {
     display: flex;
@@ -384,7 +391,7 @@ nav {
 /* Footer Section Styles*/
 
 footer {
-    background: navy;
+    background-color: white;
     color: white;
     height: auto;
     width: 100%;
@@ -430,6 +437,7 @@ footer > p {
     grid-template-columns: 1fr 1fr 1fr;
     padding: 3%;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: white;
 }
 
 .one-one-one-one-column {
@@ -438,6 +446,7 @@ footer > p {
     padding: 3%;
     gap: 20px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: white;
 }
 
 .two-column {
@@ -597,4 +606,135 @@ radial-gradient(ellipse at 50% 120%, var(--space-top) 0%, var(--space-mid) 60%, 
     .stars-big::after { animation: twinkle 10s ease-in-out infinite; }
 
 
+}
+/* === Warf Designs: Global Starry Background + Scroll (append-only) === */
+:root{
+  --space-top: #0b1545;   /* top glow */
+  --space-mid: #050b1e;   /* mid tone */
+  --space-deep: #000000;  /* deep space */
+}
+
+html, body { height: 100%; }
+
+body{
+  /* Keep gradient visible everywhere, even if earlier rules set white bg */
+  background-image: radial-gradient(
+    ellipse at 50% 120%,
+    var(--space-top) 0%,
+    var(--space-mid) 60%,
+    var(--space-deep) 100%
+  ) !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+
+  /* Allow vertical scroll; prevent sideways jiggle */
+  margin: 0;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto !important;
+
+  /* Neutralize earlier centering that blocked scroll on large screens */
+  display: block !important;
+
+  /* Readable by default on dark bg (overrides 930px color:black) */
+  color: #fff !important;
+}
+
+/* Stars fixed behind content on every breakpoint */
+.stars, .stars-mid, .stars-big{
+  position: fixed !important;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Make sure page content sits above the stars */
+header, main, footer, #page, .container, .wrap, .appmenucontainer{
+  position: relative;
+  z-index: 1;
+}
+/* Your bottom app menu should sit above everything */
+.appmenucontainer{ z-index: 99999 !important; }
+
+/* Specks (three layers) */
+.stars::after,
+.stars-mid::after,
+.stars-big::after{
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  background: transparent;
+  border-radius: 50%;
+  color: #fff;                       /* used by box-shadow via currentColor */
+  filter: drop-shadow(0 0 2px #fff); /* soft glow */
+  opacity: .9;
+}
+
+/* Small specks */
+.stars::after{
+  width: 1px; height: 1px;
+  box-shadow:
+    2vw 5vh, 8vw 12vh, 15vw 18vh, 22vw 45vh, 28vw 9vh,
+    34vw 70vh, 40vw 20vh, 46vw 55vh, 52vw 12vh, 58vw 38vh,
+    64vw 80vh, 70vw 22vh, 76vw 60vh, 82vw 14vh, 88vw 50vh,
+    94vw 28vh, 5vw 85vh, 12vw 40vh, 18vw 63vh, 25vw 30vh,
+    31vw 52vh, 37vw 10vh, 43vw 33vh, 49vw 78vh, 55vw 5vh,
+    61vw 67vh, 67vw 43vh, 73vw 90vh, 79vw 35vh, 85vw 72vh,
+    13vw 18vh, 17vw 25vh, 21vw 48vh, 27vw 62vh, 32vw 74vh,
+    38vw 6vh, 45vw 16vh, 53vw 27vh, 60vw 44vh, 68vw 58vh,
+    75vw 66vh, 83vw 72vh, 90vw 84vh, 97vw 92vh;
+}
+
+/* Medium specks */
+.stars-mid::after{
+  width: 2px; height: 2px;
+  opacity: .8;
+  box-shadow:
+    6vw 18vh, 14vw 72vh, 21vw 9vh, 29vw 56vh, 36vw 26vh,
+    44vw 88vh, 51vw 34vh, 59vw 64vh, 66vw 16vh, 74vw 48vh,
+    81vw 82vh, 89vw 23vh, 96vw 60vh, 11vw 28vh, 19vw 47vh,
+    27vw 75vh, 33vw 14vh, 41vw 40vh, 47vw 68vh, 83vw 8vh,
+    7vw 88vh, 23vw 20vh, 58vw 72vh, 72vw 10vh, 86vw 32vh;
+}
+
+/* Larger stars */
+.stars-big::after{
+  width: 3px; height: 3px;
+  opacity: .7;
+  box-shadow:
+    9vw 10vh, 18vw 82vh, 26vw 38vh, 39vw 18vh, 57vw 86vh,
+    62vw 30vh, 71vw 12vh, 78vw 54vh, 87vw 40vh, 92vw 76vh,
+    24vw 92vh, 4vw 60vh, 12vw 70vh, 35vw 84vh;
+}
+
+/* Soft twinkle */
+@keyframes twinkle{
+  0%, 100% { opacity: .6; }
+  50%      { opacity: 1;  }
+}
+.stars::after     { animation: twinkle 6s ease-in-out infinite; }
+.stars-mid::after { animation: twinkle 8s ease-in-out infinite; }
+.stars-big::after { animation: twinkle 10s ease-in-out infinite; }
+/* === Nav link reset: black + no underlines (global) === */
+nav .top-menu a,
+nav a {
+  color: #000 !important;
+  text-decoration: none !important;
+}
+
+/* Keep them black in visited state too */
+nav .top-menu a:visited,
+nav a:visited {
+  color: #000 !important;
+}
+
+/* Optional: subtle hover/focus without underline */
+nav .top-menu a:hover,
+nav a:hover,
+nav .top-menu a:focus-visible,
+nav a:focus-visible {
+  text-decoration: none;
+  opacity: .85;           /* tweak/remove if you prefer no change */
+  outline: none;          /* remove default blue outline; add your own if needed */
 }
