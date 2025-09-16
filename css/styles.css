@@ -68,7 +68,7 @@
 
 /*Header Image Styles*/
 .header-image {
-    max-width: 500px !important;
+    max-width: 300px !important;
     height: auto;
     display: block;
     margin: 0 auto;
@@ -77,8 +77,8 @@
 /* Footer Section Styles*/
 
 footer {
-    background: #2c0074;
-    color: white;
+    background-color: #ffffff;  /* Make footer white on mobile */
+    color: #000000;             /* Footer text black on mobile */
     height: auto;
     width: 100%;
     padding-top: 25%;
@@ -87,21 +87,70 @@ footer {
     display: grid;
     grid-template-columns: 1fr;
     align-items: center; 
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 footer a {
-    color: white;
+    color: #000000;             /* Footer links black on mobile */
     text-decoration: none;
     font-size: 14px;
 }
+
+/*Nav Section Styles*/
+
+nav {
+    display: flex;
+    background-color: white;
+    justify-content: center;
+    text-decoration: none !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: black !important;
+    text-decoration: none !important;
+    position: sticky;
+    top: 0;
+    z-index: 10000;
+}
+
+.top-menu {
+    display: flex;
+    color: black !important;
+    text-decoration: none !important;
+    padding-left: 10px;
+}
+
+
+
+/*Service Card Styles*/
+
+.card {
+    background: #f4f4f4;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+.card-image {
+    max-width: 250px;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 
 /* Column Section Styles*/
 .one-column {
     display: grid;
     grid-template-columns: 1fr;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-.one-two-column {
+.one-two-column {   
     display: grid;
     grid-template-columns: 1fr, 2fr;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -118,6 +167,7 @@ footer a {
     grid-template-columns: 1fr 1fr 1fr;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background-color: white;
+    max-width: 100%;
 }
 
 .two-column {
@@ -209,8 +259,8 @@ footer a {
 /* Footer Section Styles*/
 
 footer {
-    background: #2c0074;
-    color: white;
+    background-color: #ffffff;  /* Make footer white on tablet */
+    color: #000000;             /* Footer text black on tablet */
     height: auto;
     width: 100%;
     padding-top: 25%;
@@ -220,7 +270,7 @@ footer {
     align-items: center; 
 }
 footer a {
-    color: white;
+    color: #000000;             /* Footer links black on tablet */
     text-decoration: none;
     font-size: 14px;
 }
@@ -322,6 +372,7 @@ body {
     background-color: white;
     color: black;
     line-height: 1.6;
+    
 }
 
 /*Service Card Styles*/
@@ -371,7 +422,7 @@ nav {
     display: flex;
     color: black !important;
     text-decoration: none !important;
-    
+    padding-left: 10px;
 }
 
 /* Header Font Styles*/
@@ -393,8 +444,8 @@ nav {
 /* Footer Section Styles*/
 
 footer {
-    background-color: white;
-    color: white;
+    background-color: white; /* Footer white on desktop */
+    color: black;            /* Footer text black on desktop */
     height: auto;
     width: 100%;
     padding-top: 4%;
@@ -404,7 +455,7 @@ footer {
     align-items: center; 
 }
 footer a {
-    color: black;
+    color: black;            /* Footer links black on desktop */
     text-decoration: none;
     font-size: 14px;
 }
@@ -416,7 +467,8 @@ footer > p {
 .one-column {
     display: grid;
     grid-template-columns: 1fr;
-    padding: 3%;
+    padding-top: 3%;
+    padding-bottom: 0%;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -437,9 +489,10 @@ footer > p {
 .one-one-one-column {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    padding: 3%;
+    padding: 8%;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background-color: white;
+    width: 100%;
 }
 
 .one-one-one-one-column {
@@ -657,6 +710,7 @@ header, main, footer, #page, .container, .wrap, .appmenucontainer{
   z-index: 1;
   width: 100%;
 }
+
 /* Your bottom app menu should sit above everything */
 .appmenucontainer{ z-index: 99999 !important; }
 
