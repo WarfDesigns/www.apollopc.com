@@ -365,11 +365,13 @@ nav {
     text-decoration: none !important;
     position: sticky;
     top: 0;
+    z-index: 10000;
 }
 .top-menu {
     display: flex;
     color: black !important;
     text-decoration: none !important;
+    
 }
 
 /* Header Font Styles*/
@@ -653,6 +655,7 @@ body{
 header, main, footer, #page, .container, .wrap, .appmenucontainer{
   position: relative;
   z-index: 1;
+  width: 100%;
 }
 /* Your bottom app menu should sit above everything */
 .appmenucontainer{ z-index: 99999 !important; }
