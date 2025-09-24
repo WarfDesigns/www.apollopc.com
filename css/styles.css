@@ -740,7 +740,7 @@ header, main, footer, #page, .container, .wrap{
   z-index: 1;
   width: 100%;
   max-width: 100%;
-  margin: 0 auto;
+  margin: 0px;
 }
 
 /* Your bottom app menu should sit above everything */
