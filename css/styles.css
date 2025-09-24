@@ -24,7 +24,13 @@
   }
 
   /* parent page CSS */
-.one-column iframe { display: block; max-width: 100%; }
+.one-column iframe { 
+  display: block; 
+  max-width: 100%; 
+  width: 100%;
+  min-height: 560px;   /* <-- key for iOS Safari */
+  border: 0;
+}
 .one-column { overflow-x: hidden; }
 
   /* App Menu Styles */
@@ -263,7 +269,13 @@
   }
 
   /* Prevent iframe overflow like mobile */
-  .one-column iframe { display: block; max-width: 100%; }
+.one-column iframe { 
+  display: block; 
+  max-width: 100%; 
+  width: 100%;
+  min-height: 560px;   /* <-- key for iOS Safari */
+  border: 0;
+}
   .one-column { overflow-x: hidden; }
 
   /* Hide app menu on tablet */
