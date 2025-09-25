@@ -15,6 +15,8 @@
       line-height: 1.6;
   }
 
+  body, main { padding-bottom: 0; scroll-padding-bottom: 0; }
+
 /*Paragraph styles*/
 
   p {
@@ -111,8 +113,8 @@
       color: #000000;             /* Footer text black on mobile */
       height: auto;
       width: 100%;
-      padding-top: 10%;
-      padding-bottom: 20%;
+      padding-top: 25px;
+      padding-bottom: 115px;
       margin-bottom: 0;
       display: grid;
       grid-template-columns: 1fr;
