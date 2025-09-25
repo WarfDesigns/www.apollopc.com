@@ -837,7 +837,6 @@ nav {
   z-index: 10001;           /* above stars & content */
   background: #fff;         /* readable over starry bg */
   width: 100%;
-  border:#e7e7e7 solid 0.5px; /* debug: outline nav area */
 }
 
 /* === Sticky <nav> that actually sticks across the page === */
